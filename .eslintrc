@@ -15,6 +15,7 @@
     "plugins": ["react"],
     "rules": {
         "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
         "react/react-in-jsx-scope": 2,
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],
@@ -23,7 +24,6 @@
         "no-multiple-empty-lines": ["error"],
         "eol-last": ["error", "always"],
         "no-dupe-keys": "error",
-        "no-multi-spaces": "error",
         "block-spacing": "error",
         "space-before-blocks": "error",
         "no-var": "error"
