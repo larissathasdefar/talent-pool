@@ -5,12 +5,12 @@ const styles = {
     header: {
         fontSize: '3em',
         fontWeight: '300',
-        margin: '18px 0px',
+        margin: '24px 0px 14px 0px',
         color: primaryBlue
     },
     subheader: {
         fontWeight: '300',
-        margin: '18px 0px',
+        margin: '18px 0px 12px 0px',
         color: primaryBlue
     },
     headline: {

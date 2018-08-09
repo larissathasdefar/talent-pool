@@ -49,8 +49,8 @@ const items = [
 export default () => (
     <div style={ styles.container }>
         {
-            items.map(({ label, icon }) => (
-                <div style={ styles.menuItem }>
+            items.map(({ label, icon }, index) => (
+                <div key={ index } style={ styles.menuItem }>
                     { icon }
                     <div style={ styles.label }>
                         { label }

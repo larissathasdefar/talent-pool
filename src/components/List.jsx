@@ -6,12 +6,25 @@ const styles = {
         margin: '0px'
     },
     listItem: {
-        padding: '6px 12px 6px 12px'
+        padding: '6px 0px',
+        listStyle: 'none'
     }
 }
 
-export default ({ items }) => (
+export default ({ items, renderItem, style }) => (
     <ul style={ styles.list }>
-        { items.map(item => <li style={ styles.listItem }>{ item }</li>) }
+        {
+            items.map((item, index) => (
+                <li
+                    key={ index }
+                    style={ { ...styles.listItem, ...style } }>
+                    { 
+                        renderItem
+                            ? renderItem(item) 
+                            : item 
+                    }
+                </li>
+            ))
+        }
     </ul>
 )

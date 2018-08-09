@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { primaryBlue } from '../constants/colors'
 
-class SearchField extends Component {
-    render() {
-        return (
-            <div>
-                I am no one
-            </div>
-        )
+const styles = {
+    checkbox: {
+        border: `1px solid ${primaryBlue}`,
+        width: '100%',
+        padding: '15px',
+        borderRadius: '8px'
     }
 }
 
-export default SearchField
+export default ({ style, ...props }) => (
+    <input 
+        type="text"
+        style={ { ...styles.checkbox, ...style } }
+        { ...props }
+    />
+)

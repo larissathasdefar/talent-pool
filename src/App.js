@@ -1,33 +1,63 @@
 import React, { Component } from 'react'
-import { primaryBlue } from './constants/colors'
+import { defaultColor } from './constants/colors'
 import { Header, SubHeader, Headline, Title, Subheading } from './components/Typography'
 import Tag from './components/Tag'
-import Divider from './components/Divider'
 import Avatar from './components/Avatar'
-import List from './components/List'
-import Checkbox from './components/Checkbox'
-import Card from './components/Card'
 import Button from './components/Button'
-import AppBar from './components/AppBar';
+import AppBar from './components/AppBar'
+import Menu from './components/Menu'
+import Filter from './components/Filter'
+import SearchField from './components/SearchField'
 
+const styles = {
+    container: {
+        color: defaultColor,
+        maxWidth: '1440px',
+        margin: '0 auto'
+    },
+    pageHeader: {
+        padding: '0px 75px'
+    },
+    body: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    filter: {
+        width: 'fit-content',
+        marginRight: '15px'
+    },
+    talents: {
+        flex: 1
+    }
+}
+
+// TODO: Ask the Vanhack Logo Employer
 class App extends Component {
     render() {
         return (
-            <div>
-                <AppBar />
-                <Card>
+            <div style={ styles.container }>
+                <AppBar>
+                    <img src="https://app.vanhack.com/Content/img/shared/navbar/VanHack-logo-free.svg" />
+                    <Menu />
+                </AppBar>
+                <div style={ styles.pageHeader }>
                     <Header>Talent Pool</Header>
-                    <SubHeader>Filter</SubHeader>
-                    <Headline>Daniele Santos</Headline>
-                    <Title style={ { color: primaryBlue } }>Senior Manager</Title>
                     <Subheading>Looking for a professional? Here you can find a vast range of great professionals.</Subheading>
-                    <Button label="Search" />
-                </Card>
+                    <div style={ styles.body }>
+                        <div style={ styles.filter }>
+                            <SubHeader>Filters</SubHeader>
+                            <Filter />
+                        </div>
+                        <div style={ styles.talents }>
+                            <SearchField />
+                        </div>
+                    </div>
+                </div>
+                <Headline>Daniele Santos</Headline>
+                <Title>Senior Manager</Title>
+                <Button label="Search" />
                 <Tag text="My-SQL" rightText="7 years" />
-                <Divider />
                 <Avatar />
-                <List items={ ['Array', 'String', 'Boolean', 'Potato'] } />
-                <Checkbox label="Basic" value="basic" onClick={ () => alert('You clicked on me! :O') } />
             </div>
         )
     }
