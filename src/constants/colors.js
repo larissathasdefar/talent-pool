@@ -1,3 +1,4 @@
+export const silverBlue = '#f2f6f9'
 export const primaryBlue = '#3c74cf'
 export const searchTag = '#4b8ff9'
 export const targetCountryTag = '#4b8ff9'

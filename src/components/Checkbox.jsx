@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
+import { primaryBlue } from '../constants/colors'
 
-class Checkbox extends Component {
-    render() {
-        return (
-            <div>
-                I am no one
-            </div>
-        )
+const styles = {
+    checkbox: {
+        border: `1px solid ${primaryBlue}`
     }
 }
 
-export default Checkbox
+export default ({ label, value, checked, style, ...props }) => (
+    <Fragment>
+        <input 
+            type="checkbox" 
+            checked={ checked }
+            value={ value } 
+            style={ { ...styles.checkbox, ...style } }
+            { ...props }
+        />
+        { label }
+    </Fragment>
+)

@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { primaryBlue, white } from '../constants/colors'
 
-class Button extends Component {
-    render() {
-        return (
-            <div>
-                I am no one
-            </div>
-        )
+const styles = {
+    button: {
+        backgroundColor: primaryBlue,
+        color: white,
+        borderRadius: '8px',
+        border: '0px',
+        fontSize: '16px',
+        textTransform: 'uppercase',
+        padding: '14px 30px',
+        minWidth: '100px'
     }
 }
 
-export default Button
+export default ({ label, style }) => (
+    <button type="button" style={ { ...styles.button, ...style } }>
+        { label }
+    </button>
+)

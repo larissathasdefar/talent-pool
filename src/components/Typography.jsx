@@ -3,10 +3,12 @@ import React from 'react'
 const styles = {
     header: {
         fontSize: '3em',
-        fontWeight: 'lighter'
+        fontWeight: 'lighter',
+        margin: '18px 0px'
     },
     subheader: {
-        fontWeight: 'lighter'
+        fontWeight: 'lighter',
+        margin: '18px 0px'
     },
     headline: {
         fontSize: '20px'
