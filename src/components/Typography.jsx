@@ -1,14 +1,17 @@
 import React from 'react'
+import { primaryBlue, note } from '../constants/colors'
 
 const styles = {
     header: {
         fontSize: '3em',
-        fontWeight: 'lighter',
-        margin: '18px 0px'
+        fontWeight: '300',
+        margin: '18px 0px',
+        color: primaryBlue
     },
     subheader: {
-        fontWeight: 'lighter',
-        margin: '18px 0px'
+        fontWeight: '300',
+        margin: '18px 0px',
+        color: primaryBlue
     },
     headline: {
         fontSize: '20px'
@@ -17,7 +20,8 @@ const styles = {
         fontSize: '18px'
     },
     subheading: {
-        fontSize: '14px'
+        fontSize: '14px',
+        color: note
     }
 }
 
