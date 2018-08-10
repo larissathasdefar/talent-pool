@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import TalentPoolContainer from './containers/TalentPoolContainer'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<TalentPoolContainer />, document.getElementById('root'))
