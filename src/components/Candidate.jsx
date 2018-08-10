@@ -4,6 +4,7 @@ import { Headline, Subheading } from './Typography'
 import Avatar from './Avatar'
 import Tag from './Tag'
 import { primaryBlue, verified, userValidation } from '../constants/colors'
+import styled from 'styled-components'
 
 const englishLevel = [
     '',
@@ -13,8 +14,11 @@ const englishLevel = [
     'Fluent English'
 ]
 
+const CandidateInfo = styled.div`
+    flex: 1;
+`
+
 // TODO: Put styles in a styles variable
-// TODO: Put Avatar in a div with background cover
 // TODO: Infinite Scroll
 // TODO: Filter candidates
 export default props => (
@@ -27,7 +31,7 @@ export default props => (
                 margin: '12px'
             } }
         />
-        <div>
+        <CandidateInfo>
             <Headline style={ { color: primaryBlue } }>
                 { `${props.firstName} ${ props.lastName }` }
             </Headline>
@@ -37,7 +41,7 @@ export default props => (
                 props.skills.map((skill, index) =>
                     index > 15
                         ? false
-                        : <Tag text={ skill } />
+                        : <Tag key={ index } text={ skill } />
                 )
             }
             {
@@ -68,6 +72,6 @@ export default props => (
                     )
                     : null
             }
-        </div>
+        </CandidateInfo>
     </Card>
 )

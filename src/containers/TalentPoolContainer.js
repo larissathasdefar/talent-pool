@@ -90,10 +90,8 @@ class TalentPoolContainer extends Component {
             options,
             loadingSearch,
             candidatesAmout,
-            selectedOptions,
             candidates
         } = this.state
-        console.log(selectedOptions, selectedOptions == [])
         return (
             <Container>
                 <AppBar>
