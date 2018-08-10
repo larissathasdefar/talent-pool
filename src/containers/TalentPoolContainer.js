@@ -35,24 +35,10 @@ class TalentPoolContainer extends Component {
         super(props)
         this.state = {
             options: [],
+            selectedOptions: [],
+            loadingSearch: false,
             candidates: []
         }
-    }
-
-    loadSearchTerms(term = '') {
-        axios({
-            url: `${Api}/LegacySkill/GetSearch`,
-            data: {
-                text: term,
-                SkipCount: '0',
-                MaxResultCount: '10'
-            },
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-            }
-        })
-            .then(({ data }) => this.setState({ options: data.result.items }))
     }
 
     // loadCandidates() {
@@ -62,11 +48,29 @@ class TalentPoolContainer extends Component {
     // }
 
     componentDidMount() {
-        this.loadSearchTerms()
+        this.handleLoadSearchTerms()
+    }
+
+    handleLoadSearchTerms(term = '') {
+        this.setState({ loadingSearch: true })
+        axios(`${Api}/LegacySkill/GetSearch?text=${term}&SkipCount=0&MaxResultCount=10`)
+            .then(({ data }) => data.result.items)
+            .then(options => options.map(({ id, name }) => {
+                return { value: id, label: name }
+            }))
+            .then(options => this.setState({ options, loadingSearch: false }))
+            .catch(() => {
+                alert('Ops! We had an error on searching for more skills. Try again later.')
+                this.setState({ loadingSearch: false })
+            })
+    }
+
+    handleSearch(item) {
+        this.setState({ selectedOptions: item })
     }
 
     render() {
-        const { options } = this.state
+        const { options, loadingSearch } = this.state
         return (
             <Container>
                 <AppBar>
@@ -87,6 +91,9 @@ class TalentPoolContainer extends Component {
                         <Results>
                             <SearchField
                                 options={ options }
+                                isLoading={ loadingSearch }
+                                onChange={ this.handleSearch.bind(this) }
+                                onInputChange={ this.handleLoadSearchTerms.bind(this) }
                             />
                         </Results>
                     </Body>
