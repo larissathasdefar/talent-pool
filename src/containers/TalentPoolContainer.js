@@ -6,9 +6,11 @@ import AppBar from '../components/AppBar'
 import Menu from '../components/Menu'
 import Filter from '../components/Filter'
 import SearchField from '../components/SearchField'
+import Candidate from '../components/Candidate'
 import '../assets/styles.css'
 import styled from 'styled-components'
 import axios from 'axios'
+import List from '../components/List'
 
 const Container = styled.div`
     color: ${defaultColor};
@@ -30,6 +32,7 @@ const Results = styled.div`
     flex: 1
 `
 
+// TODO: see browser compability
 class TalentPoolContainer extends Component {
     constructor(props) {
         super(props)
@@ -37,18 +40,16 @@ class TalentPoolContainer extends Component {
             options: [],
             selectedOptions: [],
             loadingSearch: false,
-            candidates: []
+            candidates: [],
+            candidatesAmout: 0,
+            loadingCandidates: false
         }
     }
 
-    // loadCandidates() {
-    //     fetch(`${Api}/TalentPool/GetCandidates?EnglishLevel=0&VisaStatus=0&SkillIds=104&    SkipCount=0&MaxResultCount=10`)
-    //         .then(response => response.json())
-    //         .then(({ result }) => this.setState({ candidates: result.items }))
-    // }
 
     componentDidMount() {
         this.handleLoadSearchTerms()
+        this.handleLoadCandidates()
     }
 
     handleLoadSearchTerms(term = '') {
@@ -65,12 +66,34 @@ class TalentPoolContainer extends Component {
             })
     }
 
+    handleLoadCandidates() {
+        //     fetch(`${Api}/TalentPool/GetCandidates?EnglishLevel=0&EnglishLevel=1&VisaStatus=0&SkillIds=104,105&SkipCount=0&MaxResultCount=10`)
+        this.setState({ loadingCandidates: true })
+        axios(`${Api}/TalentPool/GetCandidates?SkipCount=0&MaxResultCount=10`)
+            .then(({ data }) => this.setState({
+                candidates: data.result.items,
+                loadingCandidates: false,
+                candidatesAmout: data.result.totalCount
+            }))
+            .catch(() => {
+                alert('Ops! We had an error on searching for more candidates. Try again later.')
+                this.setState({ loadingCandidates: false })
+            })
+    }
+
     handleSearch(item) {
         this.setState({ selectedOptions: item })
     }
 
     render() {
-        const { options, loadingSearch } = this.state
+        const {
+            options,
+            loadingSearch,
+            candidatesAmout,
+            selectedOptions,
+            candidates
+        } = this.state
+        console.log(selectedOptions, selectedOptions == [])
         return (
             <Container>
                 <AppBar>
@@ -82,7 +105,9 @@ class TalentPoolContainer extends Component {
                 </AppBar>
                 <PageHeader>
                     <Header>Talent Pool</Header>
-                    <Subheading>Looking for a professional? Here you can find a vast range of great professionals.</Subheading>
+                    <Subheading>
+                        Looking for a professional? Here you can find a vast range of great professionals.
+                    </Subheading>
                     <Body>
                         <FilterContainer>
                             <SubHeader>Filters</SubHeader>
@@ -94,6 +119,13 @@ class TalentPoolContainer extends Component {
                                 isLoading={ loadingSearch }
                                 onChange={ this.handleSearch.bind(this) }
                                 onInputChange={ this.handleLoadSearchTerms.bind(this) }
+                            />
+                            <Subheading>
+                                We have <b>{ candidatesAmout }</b> Candidates with this skills
+                            </Subheading>
+                            <List
+                                items={ candidates }
+                                renderItem={ info => <Candidate { ...info } /> }
                             />
                         </Results>
                     </Body>

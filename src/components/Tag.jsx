@@ -10,6 +10,9 @@ const Tag = styled.div`
     font-size: 14px;
     border-radius: 4px;
     width: fit-content;
+    margin: 4px;
+    text-transform: capitalize;
+    display: inline-block;
     &:hover {
         opacity: 0.9;
     }
@@ -19,8 +22,7 @@ const RightText = styled.span`
 `
 
 export default ({ text, rightText, style }) => (
-    <Tag
-        style={ style }>
-        { text } <RightText>{ `| ${rightText}` }</ RightText>
+    <Tag style={ style }>
+        { text } { rightText && <RightText>{ `| ${rightText}` }</ RightText> }
     </Tag>
 )
