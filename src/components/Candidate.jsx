@@ -18,8 +18,7 @@ const styles = {
         margin: '12px'
     },
     name: {
-        color: primaryBlue,
-        marginBottom: '6px'
+        color: primaryBlue
     },
     position: {
         marginTop: '8px',

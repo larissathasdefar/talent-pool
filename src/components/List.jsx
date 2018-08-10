@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const List = styled.ul`
-    padding: 0px;
+    padding-top: 1px;
+    padding-left: 0px;
     margin: 0px;
 `
 const ListItem = styled.li`

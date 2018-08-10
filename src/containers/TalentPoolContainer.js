@@ -23,10 +23,12 @@ const PageHeader = styled.div`
 const Body = styled.div`
     display: flex
     flex-direction: row;
+    margin-top: 42px;
 `
 const FilterContainer = styled.div`
     width: fit-content;
     margin-right: 15px;
+    min-width: 250px;
 `
 const Results = styled.div`
     flex: 1

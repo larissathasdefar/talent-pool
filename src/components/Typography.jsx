@@ -9,13 +9,15 @@ export const Header = styled.h1`
 `
 
 export const SubHeader = styled.h1`
-    font-weight: 300,
-    margin: 18px 0px 12px 0px,
+    font-weight: 300;
+    margin: 0px;
     color: ${primaryBlue};
 `
 
 export const Headline = styled.h3`
     font-size: 20px;
+    margin-bottom: 2px;
+    margin-top: 28px;
 `
 
 export const Title = styled.p`
@@ -23,6 +25,6 @@ export const Title = styled.p`
 `
 
 export const Subheading = styled.p`
-    font-size: 14px;
+    font-size: 16px;
     color: ${note};
 `
