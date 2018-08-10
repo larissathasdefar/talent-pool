@@ -15,11 +15,12 @@ class SearchField extends Component {
 
     render() {
         const { selectedOption } = this.state
-        const options = [
-            { value: 'chocolate', label: 'Chocolate' },
-            { value: 'strawberry', label: 'Strawberry' },
-            { value: 'vanilla', label: 'Vanilla' }
-        ]
+        const { options } = this.props
+        // const options = [
+        //     { value: 'chocolate', label: 'Chocolate' },
+        //     { value: 'strawberry', label: 'Strawberry' },
+        //     { value: 'vanilla', label: 'Vanilla' }
+        // ]
 
         return (
             <Select

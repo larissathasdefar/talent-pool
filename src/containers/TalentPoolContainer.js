@@ -40,10 +40,19 @@ class TalentPoolContainer extends Component {
     }
 
     loadSearchTerms(term = '') {
-        axios
-            .get(`${Api}/LegacySkill/GetSearch?text=${term}&SkipCount=0&MaxResultCount=10`)
-            .then(response => response.json())
-            .then(({ result }) => console.log({ options: result.items }))
+        axios({
+            url: `${Api}/LegacySkill/GetSearch`,
+            data: {
+                text: term,
+                SkipCount: '0',
+                MaxResultCount: '10'
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+            }
+        })
+            .then(({ data }) => this.setState({ options: data.result.items }))
     }
 
     // loadCandidates() {
@@ -57,6 +66,7 @@ class TalentPoolContainer extends Component {
     }
 
     render() {
+        const { options } = this.state
         return (
             <Container>
                 <AppBar>
@@ -75,7 +85,9 @@ class TalentPoolContainer extends Component {
                             <Filter />
                         </FilterContainer>
                         <Results>
-                            <SearchField />
+                            <SearchField
+                                options={ options }
+                            />
                         </Results>
                     </Body>
                 </PageHeader>
