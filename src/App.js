@@ -31,7 +31,6 @@ const styles = {
     }
 }
 
-// TODO: Ask the Vanhack Logo Employer
 class App extends Component {
     render() {
         return (
@@ -55,7 +54,7 @@ class App extends Component {
                 </div>
                 <Headline>Daniele Santos</Headline>
                 <Title>Senior Manager</Title>
-                <Button label="Search" />
+                <Button>Search</Button>
                 <Tag text="My-SQL" rightText="7 years" />
                 <Avatar />
             </div>

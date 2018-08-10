@@ -1,12 +1,11 @@
 import React from 'react'
+import styled from 'styled-components'
 import { divider } from '../constants/colors'
 
-const styles = {
-    divider: {
-        border: `0.5px solid ${divider}`,   // Chrome and Safari
-        backgroundColor: divider,   // Firefox and Opera
-        color: divider  // IE
-    }
-}
+const Divider = styled.hr`
+    border: 0.5px solid ${divider};   // Chrome and Safari
+    background-color: divider;   // Firefox and Opera
+    color: divider;  // IE
+`
 
-export default ({ style }) => <hr style={ { ...styles.divider, ...style } } />
+export default ({ style }) => <Divider style={ style } />

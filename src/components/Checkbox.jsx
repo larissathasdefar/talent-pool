@@ -1,19 +1,15 @@
 import React, { Fragment } from 'react'
+import styled from 'styled-components'
 import { primaryBlue } from '../constants/colors'
 
-const styles = {
-    checkbox: {
-        border: `1px solid ${primaryBlue}`
-    }
-}
+const CheckBox = styled.input`
+    border: 1px solid ${primaryBlue};
+`
 
-export default ({ label, value, checked, style, ...props }) => (
+export default ({ label, ...props }) => (
     <Fragment>
-        <input 
-            type="checkbox" 
-            checked={ checked }
-            value={ value } 
-            style={ { ...styles.checkbox, ...style } }
+        <CheckBox
+            type="checkbox"
             { ...props }
         />
         { label }

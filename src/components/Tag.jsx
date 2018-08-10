@@ -1,23 +1,26 @@
 import React from 'react'
 import { habilityTagList, white } from '../constants/colors'
+import styled from 'styled-components'
 
-const styles = {
-    tag: {
-        backgroundColor: habilityTagList,
-        color: white,
-        padding: '6px',
-        fontSize: '14px',
-        borderRadius: '4px',
-        width: 'fit-content'
-    },
-    rightText: {
-        opacity: '0.7'
+const Tag = styled.div`
+    background-color: ${habilityTagList};
+    transition: opacity 0.3s;
+    color: ${white};
+    padding: 6px;
+    fontSize: 14px;
+    border-radius: 4px;
+    width: fit-content
+    &:hover {
+        opacity: 0.9;
     }
-}
+`
+const RightText = styled.span`
+    opacity: 0.7;
+`
 
 export default ({ text, rightText, style }) => (
-    <div 
-        style={ { ...styles.tag, ...style } }>
-        { text } <span style={ styles.rightText }>{ `| ${rightText}` }</span>
-    </div>
+    <Tag
+        style={ style }>
+        { text } <RightText>{ `| ${rightText}` }</ RightText>
+    </Tag>
 )

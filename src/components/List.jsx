@@ -1,30 +1,29 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const styles = {
-    list: {
-        padding: '0px',
-        margin: '0px'
-    },
-    listItem: {
-        padding: '6px 0px',
-        listStyle: 'none'
-    }
-}
+const List = styled.ul`
+    padding: 0px;
+    margin: 0px;
+`
+const ListItem = styled.li`
+    padding: 6px 0px;
+    list-style: none;
+`
 
 export default ({ items, renderItem, style }) => (
-    <ul style={ styles.list }>
+    <List>
         {
             items.map((item, index) => (
-                <li
+                <ListItem
                     key={ index }
-                    style={ { ...styles.listItem, ...style } }>
-                    { 
+                    style={ style }>
+                    {
                         renderItem
-                            ? renderItem(item) 
-                            : item 
+                            ? renderItem(item)
+                            : item
                     }
-                </li>
+                </ListItem>
             ))
         }
-    </ul>
+    </List>
 )

@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import {
     JobIcon,
     MessagesIcon,
@@ -8,27 +9,24 @@ import {
 import Avatar from './Avatar'
 import { menuItem } from '../constants/colors'
 
-const styles = {
-    container: {
-        display: 'flex'
-    },
-    menuItem: {
-        margin: '0px 16px',
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        cursor: 'pointer'
-    },
-    label: {
-        textAlign: 'center',
-        textTransform: 'uppercase',
-        color: menuItem
-    },
-    avatar: {
-        width: '48px',
-        height: '48px'
-    }
-}
+
+const Menu = styled.div`
+    display: flex;
+`
+
+const MenuItem = styled.div`
+    margin: 0px 16px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+`
+
+const Label = styled.div`
+    text-align: center;
+    text-transform: uppercase;
+    color: ${menuItem};
+`
 
 const items = [
     { label: 'Talent', icon: <TalentIcon />},
@@ -38,25 +36,23 @@ const items = [
     {
         label: 'Profile',
         icon: (
-            <Avatar 
-                src="https://app.vanhack.com/User/getInstancePhoto?entityId=132027" 
-                style={ styles.avatar }
+            <Avatar
+                src="https://app.vanhack.com/User/getInstancePhoto?entityId=132027"
+                style={ { width: '48px', height: '48px' } }
             />
         )
     }
 ]
 
 export default () => (
-    <div style={ styles.container }>
+    <Menu>
         {
             items.map(({ label, icon }, index) => (
-                <div key={ index } style={ styles.menuItem }>
+                <MenuItem key={ index }>
                     { icon }
-                    <div style={ styles.label }>
-                        { label }
-                    </div>
-                </div>
+                    <Label>{ label }</Label>
+                </MenuItem>
             ))
         }
-    </div>
+    </Menu>
 )

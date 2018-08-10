@@ -13,16 +13,16 @@ const items = [
     {
         header: 'English level',
         options: [
-            { label: 'Basic', value: 'basic' },
-            { label: 'Intermediate', value: 'intermediate' },
-            { label: 'Advanced', value: 'advanced' },
-            { label: 'Fluent', value: 'fluent' }
+            { label: 'Basic', value: '1' },
+            { label: 'Intermediate', value: '2' },
+            { label: 'Advanced', value: '3' },
+            { label: 'Fluent', value: '4' }
         ]
     }, {
         header: 'Canadian visa status',
         options: [
-            { label: 'Open work permit', value: 'open_permit' },
-            { label: 'Permanent resident', value: 'permanent_resident' }
+            { label: 'Open work permit', value: '5' },
+            { label: 'Permanent resident', value: '6' }
         ]
     }
 ]
