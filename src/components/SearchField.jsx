@@ -1,18 +1,38 @@
-import React from 'react'
-import { primaryBlue } from '../constants/colors'
-import styled from 'styled-components'
+import React, { Component } from 'react'
+import Select from 'react-select'
 
-const Checkbox = styled.input`
-    border: 1px solid ${primaryBlue};
-    width: 100%;
-    padding: 15px;
-    border-radius: 8px;
-`
+class SearchField extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedOption: null,
+        }
+    }
 
-export default ({ style, ...props }) => (
-    <Checkbox
-        type="text"
-        style={ style }
-        { ...props }
-    />
-)
+    handleChange(selectedOption) {
+        this.setState({ selectedOption })
+        console.log('Option selected:', selectedOption)
+    }
+
+    render() {
+        const { selectedOption } = this.state
+        const options = [
+            { value: 'chocolate', label: 'Chocolate' },
+            { value: 'strawberry', label: 'Strawberry' },
+            { value: 'vanilla', label: 'Vanilla' }
+        ]
+
+        return (
+            <Select
+                isMulti
+                isSearchable
+                value={ selectedOption }
+                onChange={ () => this.handleChange() }
+                options={ options }
+                classNamePrefix="select-skills"
+            />
+        )
+    }
+}
+
+export default SearchField

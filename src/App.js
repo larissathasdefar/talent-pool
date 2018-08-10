@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { defaultColor } from './constants/colors'
-import { Header, SubHeader, Headline, Title, Subheading } from './components/Typography'
-import Tag from './components/Tag'
-import Avatar from './components/Avatar'
-import Button from './components/Button'
+import { Header, SubHeader, Subheading } from './components/Typography'
 import AppBar from './components/AppBar'
 import Menu from './components/Menu'
 import Filter from './components/Filter'
 import SearchField from './components/SearchField'
+import './assets/styles.css'
 
 const styles = {
     container: {
@@ -52,11 +50,6 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
-                <Headline>Daniele Santos</Headline>
-                <Title>Senior Manager</Title>
-                <Button>Search</Button>
-                <Tag text="My-SQL" rightText="7 years" />
-                <Avatar />
             </div>
         )
     }

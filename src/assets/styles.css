@@ -1,0 +1,80 @@
+* {
+    outline: none
+}
+
+.select-skills__container {
+    padding: 6px !important;
+}
+
+.select-skills__control, .select-skills__control--is-focused {
+    border-color: #3c74cf !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    height: 53px !important;
+}
+
+.select-skills__control:hover {
+    border-color: #4b8ff9 !important;
+}
+
+.select-skills__multi-value {
+    background-color: #4b8ff9 !important;
+    transition: opacity 0.3s;
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 4px !important;
+    cursor: pointer;
+}
+
+.select-skills__multi-value:hover {
+    opacity: 0.8;
+}
+
+.select-skills__multi-value__remove {
+    background-color: transparent !important;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px !important;
+    padding: 0 !important;
+    width: 16px;
+    height: 16px;
+    align-self: center;
+    margin-left: 6px;
+}
+
+.select-skills__multi-value__remove:hover {
+    border-radius: 10px !important;
+    padding: 0 !important;
+    width: 16px;
+    height: 16px;
+}
+
+.select-skills__multi-value__label {
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+}
+
+.select-skills__multi-value__remove svg {
+    fill: #FFFFFF
+}
+
+.select-skills__dropdown-indicator:before {
+    content: 'Search';
+    background-color: #3d74d0;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 13px 0;
+    min-width: 110px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+    margin-right: -4px;
+}
+
+.select-skills__dropdown-indicator svg,
+.select-skills__indicator-separator {
+    display: none;
+}
+
+.select-skills__clear-indicator svg {
+    fill: #3d74d0;
+}

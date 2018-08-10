@@ -7,9 +7,9 @@ const Tag = styled.div`
     transition: opacity 0.3s;
     color: ${white};
     padding: 6px;
-    fontSize: 14px;
+    font-size: 14px;
     border-radius: 4px;
-    width: fit-content
+    width: fit-content;
     &:hover {
         opacity: 0.9;
     }

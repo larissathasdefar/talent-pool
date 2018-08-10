@@ -26,6 +26,7 @@
         "no-dupe-keys": "error",
         "block-spacing": "error",
         "space-before-blocks": "error",
-        "no-var": "error"
+        "no-var": "error",
+        "no-console": "off"
     }
 }
