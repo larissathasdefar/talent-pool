@@ -23,6 +23,6 @@ export const Title = styled.p`
 `
 
 export const Subheading = styled.p`
-    font-sSize: 14px;
+    font-size: 14px;
     color: ${note};
 `

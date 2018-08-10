@@ -1,11 +1,40 @@
 import React from 'react'
 import Card from './Card'
-import { Headline, Subheading } from './Typography'
+import { Headline, Title } from './Typography'
 import Avatar from './Avatar'
 import Tag from './Tag'
 import { primaryBlue, verified, userValidation } from '../constants/colors'
 import styled from 'styled-components'
 import CandidateSkills from './CandidateSkills'
+
+const styles = {
+    card: {
+        flexDirection: 'row',
+        display: 'flex'
+    },
+    avatar: {
+        height: '164px',
+        width: '164px',
+        margin: '12px'
+    },
+    name: {
+        color: primaryBlue,
+        marginBottom: '6px'
+    },
+    position: {
+        marginTop: '8px',
+        fontSize: '17px'
+    },
+    verified: {
+        backgroundColor: verified
+    },
+    visa: {
+        backgroundColor: userValidation
+    },
+    englishLevel: {
+        backgroundColor: userValidation
+    }
+}
 
 const englishLevel = [
     '',
@@ -19,53 +48,44 @@ const CandidateInfo = styled.div`
     flex: 1;
 `
 
-// TODO: Put styles in a styles variable
 // TODO: Infinite Scroll
 // TODO: Filter candidates
 export default props => (
-    <Card style={ { flexDirection: 'row', display: 'flex' } }>
+    <Card style={ styles.card }>
         <Avatar
             src={ props.image }
-            style={ {
-                height: '164px',
-                width: '164px',
-                margin: '12px'
-            } }
+            style={ styles.avatar }
         />
         <CandidateInfo>
-            <Headline style={ { color: primaryBlue } }>
+            <Headline style={ styles.name }>
                 { `${props.firstName} ${ props.lastName }` }
             </Headline>
-            <Subheading>{ props.position }</Subheading>
+            <Title style={ styles.position }>
+                { props.position }
+            </Title>
             <CandidateSkills skills={ props.skills } />
-            {
-                props.verified && (
-                    <Tag
-                        text="Verified"
-                        style={ { backgroundColor: verified } }
-                    />
-                )
-            }
-            {
-                props.visa && props.visa > 0
-                    ? (
-                        <Tag
-                            text="Visa"
-                            style={ { backgroundColor: userValidation } }
-                        />
+            <div>
+                {
+                    props.verified && (
+                        <Tag text="Verified" style={ styles.verified } />
                     )
-                    : null
-            }
-            {
-                props.englishLevel && props.englishLevel > 0
-                    ? (
-                        <Tag
-                            text={ englishLevel[props.englishLevel] }
-                            style={ { backgroundColor: userValidation } }
-                        />
-                    )
-                    : null
-            }
+                }
+                {
+                    props.visa && props.visa > 0
+                        ? <Tag text="Visa" style={ styles.visa } />
+                        : null
+                }
+                {
+                    props.englishLevel && props.englishLevel > 0
+                        ? (
+                            <Tag
+                                text={ englishLevel[props.englishLevel] }
+                                style={ styles.englishLevel }
+                            />
+                        )
+                        : null
+                }
+            </div>
         </CandidateInfo>
     </Card>
 )

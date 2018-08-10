@@ -6,7 +6,7 @@ const List = styled.ul`
     margin: 0px;
 `
 const ListItem = styled.li`
-    padding: 6px 0px;
+    margin: 12px 0px;
     list-style: none;
 `
 

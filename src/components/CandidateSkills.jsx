@@ -1,5 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import Tag from './Tag'
+import { skillShowMore, skillFontShowMore } from '../constants/colors'
+
+const styles = {
+    showMore: {
+        backgroundColor: skillShowMore,
+        color: skillFontShowMore
+    }
+}
+
+const AMOUNT_SKILLS = 7
 
 class CandidateSkills extends Component {
     constructor(props) {
@@ -13,19 +23,39 @@ class CandidateSkills extends Component {
         this.setState({ showComplementary: true })
     }
 
-    renderSkills(skills) {
-        return skills.map((skill, index) =>
-            <Tag key={ index } text={ skill } />
+    handleHideComplementarySkills() {
+        this.setState({ showComplementary: false })
+    }
+
+    renderSkills(skills, showLess) {
+        return (
+            <Fragment>
+                {
+                    skills.map((skill, index) =>
+                        <Tag key={ index } text={ skill } />
+                    )
+                }
+                {
+                    showLess && (
+                        <Tag
+                            text="Show Less"
+                            style={ styles.showMore }
+                            onClick={ () => this.handleHideComplementarySkills() }
+                        />
+                    )
+                }
+            </Fragment>
         )
     }
 
     renderComplementarySkills(skills) {
         const { showComplementary } = this.state
         return showComplementary
-            ? this.renderSkills(skills)
+            ? this.renderSkills(skills, true)
             : (
                 <Tag
                     text={ `+ ${skills.length}` }
+                    style={ styles.showMore }
                     onClick={ () => this.handleShowComplementarySkills() }
                 />
             )
@@ -33,11 +63,11 @@ class CandidateSkills extends Component {
 
     render() {
         const { skills } = this.props
-        const first15Skills = skills.slice(0, 15)
-        const complementarySkills = skills.slice((skills.length - 15) * -1)
+        const firstSkills = skills.slice(0, AMOUNT_SKILLS)
+        const complementarySkills = skills.slice((skills.length - AMOUNT_SKILLS) * -1)
         return (
             <Fragment>
-                { this.renderSkills(first15Skills) }
+                { this.renderSkills(firstSkills) }
                 { this.renderComplementarySkills(complementarySkills) }
             </Fragment>
         )

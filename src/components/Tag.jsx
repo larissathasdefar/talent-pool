@@ -1,9 +1,9 @@
 import React from 'react'
-import { habilityTagList, white } from '../constants/colors'
+import { skillTagList, white } from '../constants/colors'
 import styled from 'styled-components'
 
 const Tag = styled.div`
-    background-color: ${habilityTagList};
+    background-color: ${skillTagList};
     transition: opacity 0.3s;
     color: ${white};
     padding: 6px;
