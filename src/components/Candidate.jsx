@@ -5,6 +5,7 @@ import Avatar from './Avatar'
 import Tag from './Tag'
 import { primaryBlue, verified, userValidation } from '../constants/colors'
 import styled from 'styled-components'
+import CandidateSkills from './CandidateSkills'
 
 const englishLevel = [
     '',
@@ -36,14 +37,7 @@ export default props => (
                 { `${props.firstName} ${ props.lastName }` }
             </Headline>
             <Subheading>{ props.position }</Subheading>
-            {
-                // TODO: show +15
-                props.skills.map((skill, index) =>
-                    index > 15
-                        ? false
-                        : <Tag key={ index } text={ skill } />
-                )
-            }
+            <CandidateSkills skills={ props.skills } />
             {
                 props.verified && (
                     <Tag

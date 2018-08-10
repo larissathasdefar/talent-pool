@@ -46,7 +46,6 @@ class TalentPoolContainer extends Component {
         }
     }
 
-
     componentDidMount() {
         this.handleLoadSearchTerms()
         this.handleLoadCandidates()

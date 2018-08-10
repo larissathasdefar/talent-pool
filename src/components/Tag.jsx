@@ -13,6 +13,7 @@ const Tag = styled.div`
     margin: 4px;
     text-transform: capitalize;
     display: inline-block;
+    cursor: pointer;
     &:hover {
         opacity: 0.9;
     }
@@ -21,8 +22,8 @@ const RightText = styled.span`
     opacity: 0.7;
 `
 
-export default ({ text, rightText, style }) => (
-    <Tag style={ style }>
+export default ({ text, rightText, style, ...tagProps }) => (
+    <Tag style={ style } {...tagProps}>
         { text } { rightText && <RightText>{ `| ${rightText}` }</ RightText> }
     </Tag>
 )
