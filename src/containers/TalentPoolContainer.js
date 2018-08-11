@@ -135,7 +135,6 @@ class TalentPoolContainer extends Component {
 
     handleLoadCandidates(isLoadingNextPage) {
         const filterQuery = this.getQueryFilterString(isLoadingNextPage)
-        console.log(filterQuery)
 
         const candidates = candidates => isLoadingNextPage
             ? concat(this.state.candidates, candidates)
