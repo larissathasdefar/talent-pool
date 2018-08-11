@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import ProfilePicture from '../assets/images/profile.jpg'
 import {
     JobIcon,
     MessagesIcon,
@@ -29,7 +30,7 @@ const Label = styled.div`
 `
 
 const items = [
-    { label: 'Talent', icon: <TalentIcon />},
+    { label: 'Talent', icon: <TalentIcon active />},
     { label: 'My jobs', icon: <JobIcon /> },
     { label: 'Message', icon: <MessagesIcon /> },
     { label: 'More', icon: <MoreIcon /> },
@@ -37,7 +38,7 @@ const items = [
         label: 'Profile',
         icon: (
             <Avatar
-                src="https://app.vanhack.com/User/getInstancePhoto?entityId=132027"
+                src={ ProfilePicture }
                 style={ { width: '48px', height: '48px' } }
             />
         )

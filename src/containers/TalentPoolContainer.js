@@ -14,6 +14,7 @@ import {
     reject,
     remove
 } from 'ramda'
+import VanHackLogo from '../assets/images/VanHack-logo.png'
 import { Header, SubHeader, Subheading } from '../components/Typography'
 import AppBar from '../components/AppBar'
 import Menu from '../components/Menu'
@@ -181,10 +182,7 @@ class TalentPoolContainer extends Component {
         return (
             <Container>
                 <AppBar>
-                    <img
-                        alt="VanHack Logo"
-                        src="https://app.vanhack.com/Content/img/shared/navbar/VanHack-logo.svg"
-                    />
+                    <img alt="VanHack Logo" src={ VanHackLogo } />
                     <Menu />
                 </AppBar>
                 <PageHeader>
