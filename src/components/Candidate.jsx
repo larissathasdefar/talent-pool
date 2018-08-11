@@ -48,7 +48,6 @@ const CandidateInfo = styled.div`
 `
 
 // TODO: Infinite Scroll
-// TODO: Filter candidates
 export default props => (
     <Card style={ styles.card }>
         <Avatar

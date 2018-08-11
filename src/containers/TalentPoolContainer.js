@@ -10,6 +10,7 @@ import {
     map,
     merge,
     pipe,
+    pluck,
     reject,
     remove
 } from 'ramda'
@@ -53,13 +54,13 @@ class TalentPoolContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            options: [],
-            selectedSkills: [],
+            skills: [],
             loadingSearch: false,
             candidates: [],
             candidatesAmout: 0,
             loadingCandidates: false,
             filters: {
+                selectedSkills: [],
                 english: [],
                 visa: []
             }
@@ -71,8 +72,17 @@ class TalentPoolContainer extends Component {
         this.handleLoadCandidates()
     }
 
-    getQueryFilterString() {
-        const { filters, selectedSkills, candidates } = this.state
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.filters !== this.state.filters) {
+            this.handleLoadCandidates()
+        }
+    }
+
+    getQueryFilterString(isLoadingNextPage) {
+        const { filters, candidates } = this.state
+        const skipCount = isLoadingNextPage
+            ? candidates.length
+            : 0
         const englishFilter = pipe(
             map(level => `EnglishLevel=${level}`),
             join('&')
@@ -81,14 +91,14 @@ class TalentPoolContainer extends Component {
             map(level => `VisaStatus=${level}`),
             join('&')
         )(filters.visa)
-        const skills = isEmpty(selectedSkills)
+        const skills = isEmpty(filters.selectedSkills)
             ? ''
-            : `SkillIds=${join(',', selectedSkills)}`
+            : `SkillIds=${join(',', filters.selectedSkills)}`
         const filterItems = [
             englishFilter,
             visaFilter,
             skills,
-            `SkipCount=${candidates.length * CANDIDATES_PER_LOAD}`,
+            `SkipCount=${skipCount}`,
             `MaxResultCount=${CANDIDATES_PER_LOAD}`
         ]
         return pipe(
@@ -101,34 +111,39 @@ class TalentPoolContainer extends Component {
         const { filters } = this.state
         const item = filters[filter]
         const position = indexOf(value, item)
-        const newFilter = position >= 0
+        const newFilterOptions = position >= 0
             ? remove(position, 1, item)
             : append(value, item)
-        const updatedFilter = merge(filters, { [filter]: newFilter })
+        const updatedFilter = merge(filters, { [filter]: newFilterOptions })
         this.setState({ filters: updatedFilter })
     }
 
+    // TODO: verify if term is different than before to not reload on SearchField focous out
     handleLoadSearchTerms(term = '') {
         this.setState({ loadingSearch: true })
         axios(`${Api}/LegacySkill/GetSearch?text=${term}&SkipCount=0&MaxResultCount=10`)
             .then(({ data }) => data.result.items)
-            .then(options => options.map(({ id, name }) => {
+            .then(skills => skills.map(({ id, name }) => {
                 return { value: id, label: name }
             }))
-            .then(options => this.setState({ options, loadingSearch: false }))
+            .then(skills => this.setState({ skills, loadingSearch: false }))
             .catch(() => {
                 alert('Ops! We had an error on searching for more skills. Try again later.')
                 this.setState({ loadingSearch: false })
             })
     }
 
-    handleLoadCandidates() {
-        const filterQuery = this.getQueryFilterString()
+    handleLoadCandidates(isLoadingNextPage) {
+        const filterQuery = this.getQueryFilterString(isLoadingNextPage)
+        console.log(filterQuery)
 
+        const candidates = candidates => isLoadingNextPage
+            ? concat(this.state.candidates, candidates)
+            : candidates
         this.setState({ loadingCandidates: true })
         axios(`${Api}/TalentPool/GetCandidates?${filterQuery}`)
             .then(({ data }) => this.setState({
-                candidates: concat(this.state.candidates, data.result.items),
+                candidates: candidates(data.result.items),
                 loadingCandidates: false,
                 candidatesAmout: data.result.totalCount
             }))
@@ -138,24 +153,26 @@ class TalentPoolContainer extends Component {
             })
     }
 
-    handleSearch({ value }) {
-        this.setState({ selectedSkills: value })
+    handleSearch(skills) {
+        const skillsId = pluck('value', skills)
+        this.setState({ filters: merge(this.state.filters, { selectedSkills: skillsId }) })
     }
 
     render() {
         const {
-            options,
+            skills,
             loadingSearch,
+            loadingCandidates,
             candidatesAmout,
-            candidates,
-            filters
+            candidates
         } = this.state
+
         return (
             <Container>
                 <AppBar>
                     <img
                         alt="VanHack Logo"
-                        src="https://app.vanhack.com/Content/img/shared/navbar/VanHack-logo-free.svg"
+                        src="https://app.vanhack.com/Content/img/shared/navbar/VanHack-logo.svg"
                     />
                     <Menu />
                 </AppBar>
@@ -168,7 +185,6 @@ class TalentPoolContainer extends Component {
                         <FilterContainer>
                             <SubHeader>Filters</SubHeader>
                             <Filter
-                                filters={ filters }
                                 onChangeFilter={ (filter, value) =>
                                     this.handleChangeFilter(filter, value)
                                 }
@@ -176,10 +192,10 @@ class TalentPoolContainer extends Component {
                         </FilterContainer>
                         <Results>
                             <SearchField
-                                options={ options }
+                                options={ skills }
                                 isLoading={ loadingSearch }
                                 onChange={ item => this.handleSearch(item) }
-                                onInputChange={ this.handleLoadSearchTerms.bind(this) }
+                                onInputChange={ term => this.handleLoadSearchTerms(term) }
                             />
                             <Subheading>
                                 We have <b>{ candidatesAmout }</b> Candidates with this skills
@@ -188,6 +204,11 @@ class TalentPoolContainer extends Component {
                                 items={ candidates }
                                 renderItem={ info => <Candidate { ...info } /> }
                             />
+                            {
+                                loadingCandidates && (
+                                    <Subheading>Loading...</Subheading>
+                                )
+                            }
                         </Results>
                     </Body>
                 </PageHeader>

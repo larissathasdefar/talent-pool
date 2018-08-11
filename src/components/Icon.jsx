@@ -12,7 +12,7 @@ const Icon = styled.div`
     }
 `
 
-// TODO: valid to accept the supported icons
+// TODO: valid to only accept the supported icons
 // TODO: put images in /assets
 
 export const JobIcon = () => <Icon icon="myJobs" />
