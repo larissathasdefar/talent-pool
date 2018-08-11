@@ -47,7 +47,6 @@ const CandidateInfo = styled.div`
     flex: 1;
 `
 
-// TODO: Infinite Scroll
 export default props => (
     <Card style={ styles.card }>
         <Avatar

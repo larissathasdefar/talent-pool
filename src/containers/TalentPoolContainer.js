@@ -70,6 +70,18 @@ class TalentPoolContainer extends Component {
     componentDidMount() {
         this.handleLoadSearchTerms()
         this.handleLoadCandidates()
+        window.addEventListener('scroll', () => this.handleScroll())
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', () => this.handleScroll())
+    }
+
+    handleScroll() {
+        const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight
+        if (isAtBottom && !this.state.loadingCandidates) {
+            this.handleLoadCandidates(true)
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -135,14 +147,14 @@ class TalentPoolContainer extends Component {
 
     handleLoadCandidates(isLoadingNextPage) {
         const filterQuery = this.getQueryFilterString(isLoadingNextPage)
-
-        const candidates = candidates => isLoadingNextPage
+        const setCandidates = candidates => isLoadingNextPage
             ? concat(this.state.candidates, candidates)
             : candidates
+
         this.setState({ loadingCandidates: true })
         axios(`${Api}/TalentPool/GetCandidates?${filterQuery}`)
             .then(({ data }) => this.setState({
-                candidates: candidates(data.result.items),
+                candidates: setCandidates(data.result.items),
                 loadingCandidates: false,
                 candidatesAmout: data.result.totalCount
             }))
